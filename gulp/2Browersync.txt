@@ -1,0 +1,5 @@
+1 npm install browser-sync -g
+
+2 npm install browser-sync --save-dev
+
+3 gulp server  //server 名字自己取的

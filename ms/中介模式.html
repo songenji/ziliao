@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var Mediator=function(){
+		//消息对象
+		var _msg={};
+		return {
+         /**
+           订阅消息方法
+           参数type 消息名称
+           参数action 消息回调函数
+         */
+         register:function(type,action){
+         	//如果该消息存在
+         	if(_msg[type]){
+         		//存入回调函数
+         		_msg[type].push(action);
+         	}else{
+         		//不存在 则建立该消息容器
+         		_msg[type]=[];
+         		//存入新消息回调函数
+         		_msg[type].push(action);
+         	}
+         },
+         /**
+           发布消息方法
+           参数type消息名称
+         **/
+         send:function(type){ 
+           //如果该消息已经被订阅
+           if(_msg[type]){
+           	 //遍历已存储的消息回调函数
+           	 for(var i=0, len=_msg[type].length;i<len;i++){
+           	 	//执行该回调函数
+           	 	_msg[type][i] && _msg[type][i]();
+           	 }
+           }
+         },
+		};
+	}();
+
+Mediator.register('demo',function(){
+console.log("first");
+});
+Mediator.register('demo',function(){
+console.log("second");
+});
+Mediator.send("demo");
+</script>
+</body>
+</html>

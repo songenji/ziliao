@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body style="height:20000px;">
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	//节流器
+	var throtttle=function(){
+		//获取第一个参数
+	   var isClear=arguments[0],fn;
+	   //如果第一个参数是boolean类型那么第一个参数则表示是否清除计时器
+	   if(typeof isClear==='boolean'){
+	   	//第二个参数则为函数
+	   	fn=arguments[1];
+	   	//函数的计时器句柄存在，这清除该计时器
+	   	fn._throttleID && clearTimeout(fn._throttleID);
+	   	//通过计时器延迟函数的执行
+	   }else{
+	   	//第一个参数为函数
+	   	fn=isClear;
+	   	//第二个参数为函数执行的参数
+	   	param=arguments[1];
+	   	//对执行时的参数适配默认值，这里我们用到以前的extend方法
+	   	var p=extend({
+	   		context:null, //执行函数执行时的作用域
+	   		args:[],      //执行函数执行时的相关参数[IE下要为数组]
+	   		time:300      //执行函数延迟执行的时间
+	   	},param);
+	   	//清除执行函数计时器句柄
+	   	arguments.callee(true,fn);
+	   	//为函数绑定计时器句柄,延迟执行函数
+	   	fn._throttleID=setTimeout(function(){
+         //执行函数
+         fn.apply(p.context,p.args)
+	   	},p.time);
+	   }
+	};
+//继承
+var extend=function(target,source){
+	//遍历源对象中的属性
+	for(var property in source){
+		//将源对象中的属性复制到目标对象中
+		target[property]=source[property];
+	}
+	//返回目标对象
+	return target
+};
+var a=0;
+function bb(){
+	console.log(a++);
+};
+$(window).on('scroll',function(){
+	throtttle(bb);
+})
+</script>
+</body>
+</html>

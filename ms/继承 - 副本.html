@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.alert{width:320px;height:150px;position:absolute;left:50%;margin-left:-160px;top:50%;margin-top:-75px;background:#f2f2f2;}
+		.alert p{font-size:12px;text-align:center;line-height:20px;color:#333333;}
+		.alert span{width:60px;height:24px;font-size:12px;color:#000000;text-align:center;line-height:24px;position:absolute;left:15px;bottom:15px;}
+		.alert b{width:60px;height:24px;font-size:12px;color:#000000;text-align:center;line-height:24px;position:absolute;right:15px;bottom:15px;}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var Alert=function(data){
+           if(!data){
+           	return;
+           }
+           this.content=data.content;
+           this.panel=document.createElement("div");
+           this.contentNode=document.createElement("p");
+           this.confirmBtn=document.createElement("span");
+           this.closeBtn=document.createElement("b");
+           this.panel.className="alert";
+           this.closeBtn.className="a-close";
+           this.confirmBtn.className="a-confirm";
+           this.confirmBtn.innerHTML=data.btn || "确认";
+           this.closeBtn.innerHTML=data.btn2 || '取消'
+           this.contentNode.innerHTML=this.content;
+           this.success=data.success || function(){};
+           this.fail=data.fail || function(){};
+      
+		};
+		Alert.prototype={
+			init:function(){
+				this.panel.appendChild(this.closeBtn);  
+				this.panel.appendChild(this.contentNode);
+				this.panel.appendChild(this.confirmBtn);  
+				document.body.appendChild(this.panel);
+				this.bindEvent();
+				this.show();
+			},
+			bindEvent:function(){
+				var me=this;
+				this.closeBtn.onclick=function(){
+					me.fail();
+					me.hide();
+				};
+				this.confirmBtn.onclick=function(){
+					me.success();
+					me.hide();
+				}
+			},
+			hide:function(){
+				this.panel.style.display='none';
+			},
+			show:function(){
+				this.panel.style.display='block';
+			}
+		};
+		var RightAlert=function(data){
+			Alert.call(this.data);
+			//this.confirmBtn.className=this.confirmBtn.className+'right';
+		};
+		var a={"content":"说法迪斯科解放了打开解放了肯定是","btn":"确定1","btn2":"取消1"};
+		var aa={"content":"1234444444"};
+		var aaa={"content":"aaaaaaaaaaaaa"};
+var cc=new Alert(aaa);
+		cc.init();
+		RightAlert.prototype=new Alert(a);
+		var b=new RightAlert();
+		RightAlert.prototype.constructor=RightAlert;
+	b.init();
+		
+		
+	
+	</script>
+</body>
+</html>

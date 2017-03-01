@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>`</title>
+</head>
+<body>
+	<div style="width:10px;height:10px;background:red;" id="div"></div>
+	<div style="width:10px;height:10px;background:green;" id="div2"></div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var div=document.getElementById('div');
+			div.onclick=function(){
+				alert(12);
+			};
+
+			var div2=document.getElementById('div2');
+			div2.onclick=function(){
+				alert("sss");
+			};
+
+    var decor=function(div,fn){
+    	var div=document.getElementById(div);
+    	if(typeof div.onclick=='function'){
+    		var old=div.onclick;
+    		div.onclick=function(){
+    			old();
+    			fn();
+    		}
+    	}else{
+    		div.onclick=fn;
+    	}
+    };
+decor("div",function(){alert(3333)});
+decor("div2",function(){alert(4444)});
+		};
+	</script>
+</body>
+</html>

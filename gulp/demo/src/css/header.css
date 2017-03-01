@@ -1,0 +1,21 @@
+header {
+  color: #000000;
+  background-image: url(../images/t24.jpg);
+  height: 100px;
+  width: 100%;
+}
+.s_1 {
+  width: 71px;
+  height: 79px;
+  background-image: url(../images/t38.png);
+}
+.s_2 {
+  width: 84px;
+  height: 76px;
+  background-image: url(../images/t39.png);
+}
+.s_3 {
+  width: 113px;
+  height: 73px;
+  background-image: url(../images/t40.png);
+}
