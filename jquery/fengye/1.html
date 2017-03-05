@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>document</title>
+	<link rel="stylesheet" type="text/css" href="pagination.css"/>
+</head>
+<body>
+  <div class="pageBox">
+	<div class="pages">
+	  <div id="Pagination"></div>
+	  <div class="searchPage">
+	    <span class="page-sum">共<strong class="allPage"></strong>页</span>
+	    <span class="page-go">跳转<input type="text">页</span>
+	    <a href="javascript:;" class="page-btn">GO</a>
+	  </div>
+	</div>
+</div>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script src="jquery.pagination.js"></script>
+<script>
+$("#Pagination").pagination(10);
+$(".allPage").text(10);
+//点击页码返回第几页
+function aa(n){
+	alert(n);
+}
+//输入页码与总页数判断
+$(document).on("blur",".page-go input",function(){
+	var n=$(".pagination").find(".next").prev("a").text()-0;
+	var a=$.trim($(this).val())-0;
+	if(a>n){
+		$(this).val(n);
+	}
+	if(a<=0){
+		$(this).val(1);
+	}
+});
+</script>
+</body>
+</html>

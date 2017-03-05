@@ -1,0 +1,122 @@
+@charset "utf-8";
+.pages {
+	display: table;
+	/* width:720px; */
+	margin:auto;
+ padding:40px 0;
+overflow: hidden;
+}
+.pages #Pagination {
+  float: left;
+  overflow: hidden;
+}
+.pages #Pagination .pagination {
+  height: 40px;
+  text-align: right;
+  font-family: \u5b8b\u4f53,Arial;
+}
+.pages #Pagination .pagination a,
+.pages #Pagination .pagination span {
+  float: left;
+  display: inline;
+  padding: 11px 13px;
+  border: 1px solid #e6e6e6;
+  border-right: none;
+  background: #f6f6f6;
+  color: #666666;
+  font-family: \u5b8b\u4f53,Arial;
+  font-size: 14px;
+  cursor: pointer;
+}
+.pages #Pagination .pagination .current {
+  background: #e20000;
+  color: #fff;
+}
+.pages #Pagination .pagination .prev,
+.pages #Pagination .pagination .next {
+  float: left;
+  padding: 11px 13px;
+  border: 1px solid #e6e6e6;
+  background: #f6f6f6;
+  color: #666666;
+  cursor: pointer;
+  height:16px;
+}
+.pages #Pagination .pagination .prev i,
+.pages #Pagination .pagination .next i {
+  display: inline-block;
+  width: 4px;
+  height: 11px;
+  margin-right: 5px;
+  background: url(../images/icon.fw.png) no-repeat;
+}
+.pages #Pagination .pagination .prev {
+  border-right: none;
+}
+.pages #Pagination .pagination .prev i {
+  background-position: -144px -1px;
+  *background-position: -144px -4px;
+}
+.pages #Pagination .pagination .next i {
+  background-position: -156px -1px;
+  *background-position: -156px -4px;
+}
+.pages #Pagination .pagination .pagination-break {
+  padding: 11px 5px;
+  border: none;
+  border-left: 1px solid #e6e6e6;
+  background: none;
+  cursor: default;
+}
+.pages .searchPage {
+  float: left;
+  padding: 8px 0;
+}
+.pages .searchPage .page-sum {
+  padding: 11px 13px;
+  color: #999999;
+  font-family: \u5b8b\u4f53,Arial;
+  font-size: 14px;
+}
+.pages .searchPage .page-go {
+  padding: 8px 0;
+  color: #999999;
+  font-family: \u5b8b\u4f53,Arial;
+  font-size: 14px;
+  padding: 10px 0\9;
+  *padding: 6px 0;
+}
+.pages .searchPage .page-go input {
+  width: 21px;
+  height: 20px;
+  margin: 0 5px;
+  padding-left: 5px;
+  border: 1px solid #e4e4e4;
+}
+.pages .searchPage .page-btn {
+  margin: 9px 0 5px 5px;
+  padding: 2px 5px;
+  background: #e20000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-family: Arial, 'Microsoft YaHei';
+  font-size: 14px;
+  text-decoration: none;
+}
+
+
+/*modal——login*/
+.xq_modalBox {position:fixed; width:100%;height:100%; top:0%;left:0%; opacity:0.8; filter: alpha(opacity=80); background:#000000; z-index:1000; display:none;}
+.xq_modalCon {position:fixed;  width:400px; height:380px; top:50%; left:50%; margin-left:-160px; margin-top:-150px; z-index:1001; display:none; }
+.LoginCancle {position:absolute; left:376px; top:6px; width:16px;  height:12px; cursor:pointer; background:url(../images/a_cancle.png) no-repeat; }
+form#login_form{width:320px;height:300px;padding:40px;position: absolute;right:-50px;background:white;}
+form#login_form span{display: inline-block;}
+form#login_form li{width:320px;position: relative;}
+form#login_form li:nth-child(1){padding-bottom: 10px;font-size: 16px;}
+form#login_form li:last-child{padding-top: 8px;font-size: 12px;}
+form#login_form li.li_input input{margin-bottom: 30px;width:320px;height:30px; }
+form#login_form .xq_code{position: absolute;right:30px;top:0px;width:50px;height:24px;padding-top: 6px;z-index: 10;}
+form#login_form .btn_refresh{cursor: pointer;position: absolute;right:-2px;top:0px;z-index:10;width:25px;height:25px;background:url(../images/a_yanzheng.png) no-repeat;background-position:-27px 3px;background-size:cover;z-index:10;}
+form#login_form .btn_refresh:hover{background-position:-2px 3px; } 
+form#login_form button{font-size: 16px;border:0px;width:322px;height:40px;background:#e20000;color:#fff;}
+.tips{width:320px;height:15px;line-height: 15px;color:red;position: absolute;top:37px;font-size:14px;display:none;}
