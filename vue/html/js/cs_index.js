@@ -15728,6 +15728,9 @@
 	      // this.$emit(this.$store.commit("s_shi",newval)); //市
 	    },
 	    selected_qu: function selected_qu(newval, oldval) {
+	      if (newval == '') {
+	        this.qu = '';
+	      }
 	      if (this.selected_sheng && this.selected_shi && this.selected_qu) {
 	        this.xs = true;
 	      } else {
