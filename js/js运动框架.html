@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+div{width:100px;height:100px;background-color:red;border:solid 1px #000;margin-top:50px}
+#div3{width:100px;height:100px;background-color:red;border:solid 1px #000;margin-top:50px;filter:alpha(opacity=50);opacity:0.5}
+</style>
+<script>
+window.onload=function(){
+	var div1=document.getElementsByTagName("div")
+div1[0].onmouseover=function(){
+	//starmove(this,'width',300,function(){alert(1);})
+	starmove2(this,{'width':200,'height':200})
+	}
+	div1[0].onmouseout=function(){
+	//starmove(this,'width',100)
+    starmove2(this,{'width':100,'height':100})
+	}
+	div1[1].onmouseover=function(){
+		starmove(this,'height',300)
+		}
+		div1[1].onmouseout=function(){
+		starmove(this,'height',100)
+		}
+		div1[2].onmouseover=function(){
+		starmove(this,'fontSize',30)
+		}
+		div1[2].onmouseout=function(){
+		starmove(this,'fontSize',10)
+		}
+			div1[3].onmouseover=function(){
+		starmove(this,'opacity',100)
+		}
+		div1[3].onmouseout=function(){
+		starmove(this,'opacity',50)
+		}
+	var time=null
+	//1
+	function starmove(obj,attr,iTarget,fn){
+		clearInterval(obj.time)
+		obj.time=setInterval(function(){
+		
+			var icur=0;
+			if(attr=="opacity"){
+				icur=parseInt(parseFloat(getstyle(obj,attr))*100)
+				}
+			else{
+				icur=parseInt(getstyle(obj,attr))
+				}
+			var speend=(iTarget-icur)/8
+			speend=speend>0?Math.ceil(speend):Math.floor(speend)
+			if(iTarget==icur){
+				clearInterval(obj.time);
+				if(fn){
+				 fn();
+				}
+				}
+				else{
+					if(attr=="opacity"){
+						obj.style.filter='alpha(opacity:'+(icur+speend)+')'
+						obj.style.opacity=(icur+speend)/100
+						}
+					else{
+					obj.style[attr]=icur+speend+'px'
+					}
+				}
+			},30)
+		}
+		
+		//2
+		function starmove2(obj,json,fn){
+		clearInterval(obj.timer)
+		 obj.timer=setInterval(function(){
+		   var bStop=true;  //这一次运动结束--所有值都到达
+		   for(var attr in json){
+		   //取当前的值
+		        var icur=0;
+				if(attr=="opacity"){
+					icur=parseInt(parseFloat(getstyle(obj,attr))*100)
+					}
+				else{
+					icur=parseInt(getstyle(obj,attr))
+					}
+			    //算速度
+				var speend=(json[attr]-icur)/8
+				speend=speend>0?Math.ceil(speend):Math.floor(speend)
+				//检测停止
+					if(icur!=json[attr]){
+					   bStop=false;
+					}
+						if(attr=="opacity"){
+							obj.style.filter='alpha(opacity:'+(icur+speend)+')'
+							obj.style.opacity=(icur+speend)/100
+							}
+						else{
+						obj.style[attr]=icur+speend+'px'
+						}
+					
+		   }
+		   
+		   if(bStop){
+		      	clearInterval(obj.time);
+				if(fn){
+				 fn();
+				}
+		   }
+		 },30);
+		}
+		
+	function getstyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[attr]
+			}
+			else{
+				return getComputedStyle(obj,false)[attr]
+				}
+		}
+	}
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div>fsdfsd</div>
+<div id="div3"></div>
+</body>
+</html>
