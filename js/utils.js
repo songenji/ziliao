@@ -1,3 +1,4 @@
+/*sej*/
 var utils = (function () {
 	var flag = "getComputedStyle" in window;
 
