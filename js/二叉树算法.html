@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+//		                        8
+//		         3                             10
+//	   1                  6                              14
+//	             4               7                   13
+
+
+	function BinaryTree(){
+		//二叉树的创建
+		var Node=function(key){
+			this.key=key;
+			this.left=null;
+			this.right=null;
+		}
+
+		var root=null;
+
+		var insertNode=function(node,newNode){
+             if(newNode.key<node.key){
+             	if(node.left===null){
+             		node.left=newNode;
+             	}else{
+             		insertNode(node.left,newNode);
+             	}
+             }else{
+             	 if(node.right===null){
+             	 	node.right=newNode;
+             	 }else{
+             	 	insertNode(node.right,newNode);
+             	 }
+             }
+		}
+
+		this.insert=function(key){
+			var newNode=new Node(key);
+			if(root===null){
+				root=newNode;
+			}else{
+				insertNode(root,newNode);
+			}
+		}
+
+    //中序遍历
+    var inOrderTraverseNode=function(node,callback){
+        if(node!==null){
+           inOrderTraverseNode(node.left,callback);
+           callback(node.key);
+           inOrderTraverseNode(node.right,callback);
+        }
+    };
+    this.inOrderTraverse=function(callback){
+    	inOrderTraverseNode(root,callback);
+    }
+    //前序遍历
+    var preOrderTraverseNode=function(node,callback){
+        if(node!==null){
+           callback(node.key);
+           preOrderTraverseNode(node.left,callback); 
+           preOrderTraverseNode(node.right,callback);
+        }
+    };
+     this.preOrderTraverse=function(callback){
+     	preOrderTraverseNode(root,callback);
+     }
+
+      //后序遍历
+    var postOrderTraverseNode=function(node,callback){
+        if(node!==null){
+           postOrderTraverseNode(node.left,callback); 
+           postOrderTraverseNode(node.right,callback);
+           callback(node.key);
+        }
+    };
+     this.postOrderTraverse=function(callback){
+     	postOrderTraverseNode(root,callback);
+     }
+
+    //取最小值
+    var minNode=function(node){
+    	if(node){
+    		while(node && node.left!==null){
+    			node=node.left;
+    		}
+    		return node.key
+    	}
+    }
+    this.min=function(){
+    	return minNode(root);
+    }
+   //取最大值
+   var maxNode=function(node){
+    	if(node){
+    		while(node && node.right!==null){
+    			node=node.right;
+    		}
+    		return node.key
+    	}
+    }
+    this.max=function(){
+    	return maxNode(root);
+    }
+    //查找给定的数值
+    var searchNode=function(node,key){
+         if(node===null){
+         	return false
+         }
+         if(key<node.key){
+         	return searchNode(node.left,key);
+         }else if(key>node.key){
+         	return searchNode(node.right,key);
+         }else{
+         	return true;
+         }
+    }
+    this.search=function(key){
+      return searchNode(root,key);
+    }
+}
+
+
+	var nodes=[8,3,10,1,6,14,4,7,13];
+    var binaryTree=new BinaryTree();
+    nodes.forEach(function(key){
+          binaryTree.insert(key);
+    });
+ var callback=function(key){
+ 	console.log(key);
+ }
+ //中序遍历调用
+ binaryTree.inOrderTraverse(callback);
+  //前序遍历调用   复制一颗二叉树
+ //binaryTree.preOrderTraverse(callback);
+ //后序遍历调用   复制一颗二叉树
+ //binaryTree.postOrderTraverse(callback);
+console.log('min node is：'+ binaryTree.min());
+console.log('max node is：'+ binaryTree.max());
+console.log(binaryTree.search(7)?'key 7 is found':'key 7 is not found');
+console.log(binaryTree.search(9)?'key 7 is found':'key 7 is not found');
+</script>
+</body>
+</html>
