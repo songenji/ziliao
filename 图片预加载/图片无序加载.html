@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片无序加载</title>
+</head>
+<body>
+<script src="jquery.js"></script>
+<script src="preload.js"></script>
+<script type="text/javascript">
+//不使用preload插件
+imgs=[
+    '1.jpg',
+    '2.jpg'
+];
+   var index=0,
+    len=imgs.length,
+    count=0,
+    $progress=$('.progress');
+  //无序加载方法
+   $.each(imgs,function(i,src){
+       var imgObj=new Image();
+       $(imgObj).on('load error',function(){
+           $progress.html(Math.round((count+1)/len*100)+'%');
+           if(count>=len-1){
+            $(".loading").hide();// load页隐藏
+            document.title='1/'+len;
+           }
+           count++;
+       })
+       imgObj.src=src;
+   });
+
+
+    $(".btn").on("click",function(){
+        if('prev'===$(this).data('control')){ //上一张
+            index=Math.max(0,--index);
+        }else{  //下一张
+             index=Math.min(len-1,++index);
+        }
+        document.title=(index+1)+'/'+len;
+        $("#img").attr("src",imgs[index]);
+    })
+</script>
+<script type="text/javascript">
+//使用preload插件
+imgs=[
+    '1.jpg',
+    '2.jpg'
+];
+   var index=0,
+    len=imgs.length,
+    $progress=$('.progress');
+  //无序加载方法
+ /*  $.each(imgs,function(i,src){
+       var imgObj=new Image();
+       $(imgObj).on('load error',function(){
+           $progress.html(Math.round((count+1)/len*100)+'%');
+           if(count>=len-1){
+            $(".loading").hide();// load页隐藏
+            document.title='1/'+len;
+           }
+           count++;
+       })
+       imgObj.src=src;
+   });*/
+
+   $.preload(imgs,{
+    each:function(count){   //每一张完毕执行的方法
+        $progress.html(Math.round((count+1)/len*100)+'%');
+    },
+    all:function(){//所有图片完毕执行的方法
+       $(".loading").hide();// load页隐藏
+        document.title='1/'+len;
+    }
+   })
+
+
+    $(".btn").on("click",function(){
+        if('prev'===$(this).data('control')){ //上一张
+            index=Math.max(0,--index);
+        }else{  //下一张
+             index=Math.min(len-1,++index);
+        }
+        document.title=(index+1)+'/'+len;
+        $("#img").attr("src",imgs[index]);
+    })
+</script>
+</body>
+</html>
